@@ -1,3 +1,20 @@
 <div class="game-box">
 
+
+    <div class="card-stack">
+        <img *ngFor="let c of [0,1,2,3]; let i= index" [ngStyle]="{'right.px': i * 5}"
+            src="assets/img/all cards(400 dpi)/53.png">
+
+            <!-- top card -->
+        <img (click)="takeCard()" class="top-card" style="right: 25px;" src="assets/img/all cards(400 dpi)/53.png">
+
+            <!-- stack for played cards -->
+        <img *ngFor="let c of game.playedCards" class="played-card"
+            src="assets/img/all cards(400 dpi)/{{ c }}.png">
+
+            <!-- pick card -->
+        <img (click)="takeCard()" *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"
+            src="assets/img/all cards(400 dpi)/{{ currentCard }}.png">
+
+    </div>
 </div>
