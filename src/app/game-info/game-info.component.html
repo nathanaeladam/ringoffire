@@ -1,9 +1,9 @@
 <mat-card class="card">
     <div>
-        <mat-card-title>{{ card ? title : 'Starten sie mit dem Spiel' }}</mat-card-title>
+        <mat-card-title>{{ card ? title : 'Fügen sie die Spielernamen hinzu und dann kann es losgehen :D' }}</mat-card-title>
         <mat-icon (click)="help()">help</mat-icon>
     </div>
     <mat-card-content *ngIf="showHelp">
-        {{ card ? description : 'Bitte klicken Sie auf eine Karte um diese zu ziehen' }}
+        {{ card ? description : 'Klicken Sie unten aufs Plus um Spieler hinzuzufügen. Und um ein Karte zu ziehen klicken Sie einfach auf den Kartenstapel. Viel Spaß!' }}
     </mat-card-content>
 </mat-card>
