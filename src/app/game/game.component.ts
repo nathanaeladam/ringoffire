@@ -20,6 +20,10 @@ export class GameComponent implements OnInit {
   }
 
   openDialog(): void {
+    if (this.game.players[5]) {
+      alert('Maximale Spieleranzahl ereicht');
+      return;
+    }
     const dialogRef = this.dialog.open(AddPlayerDialogComponent);
 
     dialogRef.afterClosed().subscribe(name => {
@@ -36,6 +40,11 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
+    // if nobody is player XD
+    if (!this.game.players[0]) {
+      alert('geben sie bitte Spielernamen über den Plus Button ein!');
+      return;
+    }
     // if card stack is empty
     if (!this.game.stack[0]) {
       alert('card stack is empty');
