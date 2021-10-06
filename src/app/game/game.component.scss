@@ -42,6 +42,19 @@
     right: 0;
 }
 
+.add-player-btn{
+    position: absolute;
+    right: 32px;
+    bottom: 32px;
+}
+
+.info-bottom{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    max-width: 40vw;
+}
+
 
 @keyframes pick-card-animation {
     0% {

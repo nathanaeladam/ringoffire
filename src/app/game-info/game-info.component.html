@@ -1,0 +1,9 @@
+<mat-card class="card">
+    <div>
+        <mat-card-title>{{ card ? title : 'Starten sie mit dem Spiel' }}</mat-card-title>
+        <mat-icon (click)="help()">help</mat-icon>
+    </div>
+    <mat-card-content *ngIf="showHelp">
+        {{ card ? description : 'Bitte klicken Sie auf eine Karte um diese zu ziehen' }}
+    </mat-card-content>
+</mat-card>

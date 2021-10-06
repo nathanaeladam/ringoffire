@@ -1,8 +1,8 @@
 export class Game {
-    public players: string[] = ['Hans', 'Peter', 'Timon', 'Nathanael', 'Markus'];
+    public players: string[] = ['test','test', 'test', 'test'];
     public stack: number[] = [];
     public playedCards: number[] = [];
-    public currentPlayer: number = 0;
+    public currentPlayer = 0;
 
     constructor(){
         for (let i = 1; i < 53; i++) {
