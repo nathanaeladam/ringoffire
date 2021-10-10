@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Game } from 'src/models/game';
 import { AddPlayerDialogComponent } from '../add-player-dialog/add-player-dialog.component';
@@ -39,6 +39,10 @@ export class GameComponent implements OnInit {
     console.log(this.game);
   }
 
+  refresh(){
+    window.location.reload();
+  }
+
   takeCard() {
     // if nobody is player XD
     if (!this.game.players[0]) {
@@ -65,3 +69,4 @@ export class GameComponent implements OnInit {
     }, 1000);
   }
 }
+
