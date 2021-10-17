@@ -2,8 +2,8 @@
     display: flex;
     align-items: center;
     border: 1px solid white;
-    border-right: hidden;
-    border-radius: 50px 0 0 50px;
+    border-left: hidden;
+    border-radius: 0 50px 50px 0;
     background-color: rgba(63, 81, 181, 0.3);
 
     img {
@@ -18,8 +18,23 @@
         margin-right: 16px;
         color: white;
     }
+
+    @media (max-width:720px){
+        img{
+            width: 35px;
+        }
+        span{
+            font-size: 24px !important;
+            margin-left: 8px !important;
+            margin-right: 8px !important;
+        }
+    }
 }
 
 .player-aktive {
     background-color: rgb(63, 81, 181);
+}
+
+.hide-player{
+    display: none;
 }

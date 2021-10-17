@@ -8,7 +8,8 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 export class GameInfoComponent implements OnInit, OnChanges {
   cardAction = [
     {
-      title: 'Waterfall', description: 'Das Ass steht für den Wasserfall. Alle Spieler setzen zum trinken an. Im Uhrzeigersinn darf erst dann mit dem Trinken aufgehört werden, wenn der rechte Sitznachbar davor seinen Wasserfall beendet hat. Der Spieler, der das Ass zieht darf zu erst aufhören zu trinken (wann er will).'},
+      title: 'Waterfall', description: 'Das Ass steht für den Wasserfall. Alle Spieler setzen zum trinken an. Im Uhrzeigersinn darf erst dann mit dem Trinken aufgehört werden, wenn der rechte Sitznachbar davor seinen Wasserfall beendet hat. Der Spieler, der das Ass zieht darf zu erst aufhören zu trinken (wann er will).'
+    },
     { title: '2 is for you', description: 'Du darfst eine Person bestimmen, die einen Schluck aus ihrem Getränk nimmt..' },
     { title: '3 is me', description: 'Du musst einen Schluck trinken.' },
     { title: '4 is floor', description: 'Berühre mit deiner Hand den Boden. Der Mitspieler, der zuletzt den Boden berührt, muss einen Schluck trinken.' },
@@ -23,14 +24,20 @@ export class GameInfoComponent implements OnInit, OnChanges {
     { title: 'The King', description: 'Gebe etwas von deinem Becher in den Kings-Cup. Wer den letzten König zieht muss den Kings-Cup austrinken' },
   ];
 
-  showHelp = false;
   title = '';
   description = '';
+  showInfobutton = false;
+  showInfobox = false;
   @Input() card;
 
   constructor() { }
 
   ngOnInit(): void {
+    if (this.card) {
+      let nummericalValue = (this.card - 1) % 13;
+      this.title = this.cardAction[nummericalValue].title;
+      this.description = this.cardAction[nummericalValue].description;
+    }
   }
 
   ngOnChanges(): void {
@@ -38,11 +45,11 @@ export class GameInfoComponent implements OnInit, OnChanges {
       let nummericalValue = (this.card - 1) % 13;
       this.title = this.cardAction[nummericalValue].title;
       this.description = this.cardAction[nummericalValue].description;
-      this.showHelp = false;
+      this.showInfobutton = true;
     }
   }
 
-  help() {
-    this.showHelp = true;
+  showInfo(){
+      alert(this.description);
   }
 }

@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
   }
 
   openDialog(): void {
-    if (this.game.players[5]) {
+    if (this.game.players[7]) {
       alert('Maximale Spieleranzahl ereicht');
       return;
     }

@@ -1,4 +1,5 @@
 .card {
+
     div {
         display: flex;
     }
@@ -6,4 +7,15 @@
     mat-icon {
         cursor: pointer;
     }
+}
+
+.infobox{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50% -50%);
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    background-color: yellow;
 }

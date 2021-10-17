@@ -15,15 +15,28 @@
     </div>
 </div>
 
+<!-- desktop player container ---------------------------------- -->
+<div class="scroll-container hide-mobile">
 <app-player *ngFor="let player of game.players; let i= index;" [ngStyle]="{'top.px': 40 + (i * 60)}" [name]="player"
     [playerAktive]="i == game.currentPlayer" class="player-position"></app-player>
+</div>
 
-<button (click)="openDialog()" class="add-player-btn" mat-fab color="primary"
+<!-- mobile player container --------------------- -->
+<div class="scroll-container hide-desktop">
+<app-player *ngFor="let player of game.players; let i= index;" [ngStyle]="{'top.px': 5 + (i * 40)}" [name]="player"
+    [playerAktive]="i == game.currentPlayer" class="player-position"></app-player>
+</div>
+
+    <!-- add new player button ------------------------------------>
+<button (click)="openDialog()" class="add-player-btn" title="add new player" mat-fab color="primary"
     aria-label="Example icon button with a bookmark icon">
     <mat-icon>add</mat-icon>
 </button>
-<button (click)="newGame()" class="refresh-button" mat-fab color="primary">
+
+<!--  reset game button ------------------------- -->
+<button (click)="newGame()" class="refresh-button" title="Start new game" mat-fab color="primary">
     <mat-icon>refresh</mat-icon>
 </button>
 
+<!--    info button -->
 <app-game-info [card]="currentCard" class="info-bottom"></app-game-info>
