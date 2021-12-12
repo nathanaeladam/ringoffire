@@ -10,8 +10,8 @@
         <img *ngFor="let c of game.playedCards" class="played-card" src="assets/img/all cards(400 dpi)/{{ c }}.png">
 
         <!-- pick card -->
-        <img (click)="takeCard()" *ngIf="pickCardAnimation" class="pick-card" style="right: 25px;"
-            src="assets/img/all cards(400 dpi)/{{ currentCard }}.png">
+        <img (click)="takeCard()" *ngIf="game.pickCardAnimation" class="pick-card" style="right: 25px;"
+            src="assets/img/all cards(400 dpi)/{{ game.currentCard }}.png">
     </div>
 </div>
 
@@ -39,4 +39,4 @@
 </button>
 
 <!--    info button -->
-<app-game-info [card]="currentCard" class="info-bottom"></app-game-info>
+<app-game-info [card]="game.currentCard" class="info-bottom"></app-game-info>

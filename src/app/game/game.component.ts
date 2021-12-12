@@ -1,7 +1,10 @@
 import { Component, OnInit, ɵɵqueryRefresh } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from 'src/models/game';
 import { AddPlayerDialogComponent } from '../add-player-dialog/add-player-dialog.component';
+
 
 @Component({
   selector: 'app-game',
@@ -9,15 +12,51 @@ import { AddPlayerDialogComponent } from '../add-player-dialog/add-player-dialog
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
-  pickCardAnimation = false;
-  currentCard: number = undefined;
   game: Game;
+  gameId: string;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private firestore: AngularFirestore, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.newGame();
+    this.route.params.subscribe((params) => {
+      console.log(params.id);
+      this.gameId = params.id;
+
+      this
+        .firestore
+        .collection('games')
+        .doc(this.gameId)
+        .valueChanges()
+        .subscribe((game: any) => {
+          console.log('game update', game);
+
+          this.game.currentPlayer = game.currentPlayer;
+          this.game.playedCards = game.playedCards;
+          this.game.stack = game.stack;
+          this.game.players = game.players;
+          this.game.currentCard = game.currentCard;
+          this.game.pickCardAnimation = game.pickCardAnimation;
+        })
+        ;
+    });
   }
+
+
+  newGame() {
+    this.game = new Game();
+  }
+
+  saveGame() {
+    this
+      .firestore
+      .collection('games')
+      .doc(this.gameId)
+      .update(this.game.toJson());
+  }
+
+
+
 
   openDialog(): void {
     if (this.game.players[7]) {
@@ -29,14 +68,12 @@ export class GameComponent implements OnInit {
     dialogRef.afterClosed().subscribe(name => {
       if (name) {
         this.game.players.push(name);
+        this.saveGame();
       }
     });
   }
 
 
-  newGame() {
-    this.game = new Game();
-  }
 
   takeCard() {
     // if nobody is player XD
@@ -46,22 +83,44 @@ export class GameComponent implements OnInit {
     }
     // if card stack is empty
     if (!this.game.stack[0]) {
-      alert('card stack is empty');
+      alert('Kartenstapel war leer und wurde jetzt neu gemischt');
+      for (let i = 1; i < 53; i++) {
+        const number = i;
+        this.game.stack.push(number);
+      }
+      shuffle(this.game.stack);
       return;
-    } 
+    }
     //if not ok to animation now
-    if (this.pickCardAnimation) {
+    if (this.game.pickCardAnimation) {
       return;
-    } 
+    }
 
-    this.currentCard = this.game.stack.pop();
-    this.pickCardAnimation = true;
+    this.game.currentCard = this.game.stack.pop();
+    this.game.pickCardAnimation = true;
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+    this.saveGame();
+
+
     setTimeout(() => {
-      this.game.currentPlayer++;
-      this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
-      this.game.playedCards.push(this.currentCard);
-      this.pickCardAnimation = false;
+      this.game.playedCards.push(this.game.currentCard);
+      this.game.pickCardAnimation = false;
+      this.saveGame();
     }, 1000);
   }
 }
 
+
+
+
+function shuffle(array: number[]) {
+  let currentIndex = array.length, randomIndex;
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+  return array;
+}
