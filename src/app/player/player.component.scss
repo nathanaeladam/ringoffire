@@ -6,12 +6,20 @@
     border-radius: 0 50px 50px 0;
     background-color: rgba(63, 81, 181, 0.3);
 
-    img {
+    .profile-img {
         width: 50px;
         height: width;
         object-fit: cover;
         border-radius: 100%;
     }
+
+    .delete-img {
+        width: 25px;
+        height: width;
+        object-fit: cover;
+        cursor: pointer;
+    }
+    
     span {
         font-size: 40px;
         margin-left: 16px;
@@ -19,11 +27,11 @@
         color: white;
     }
 
-    @media (max-width:720px){
-        img{
+    @media (max-width: 720px) {
+        .profile-img {
             width: 35px;
         }
-        span{
+        span {
             font-size: 24px !important;
             margin-left: 8px !important;
             margin-right: 8px !important;
@@ -35,6 +43,6 @@
     background-color: rgb(63, 81, 181);
 }
 
-.hide-player{
+.hide-player {
     display: none;
 }

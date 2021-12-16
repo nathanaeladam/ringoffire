@@ -66,11 +66,19 @@ export class GameComponent implements OnInit {
     const dialogRef = this.dialog.open(AddPlayerDialogComponent);
 
     dialogRef.afterClosed().subscribe(name => {
-      if (name) {
+      if (this.game.players.includes(name)) {
+        alert('Diese Name wird bereits verwendet');
+        return
+      } else if (name) {
         this.game.players.push(name);
         this.saveGame();
       }
     });
+  }
+
+  deletePlayer(){
+    console.log("delete works");
+    
   }
 
 
