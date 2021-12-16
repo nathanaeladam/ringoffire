@@ -76,12 +76,6 @@ export class GameComponent implements OnInit {
     });
   }
 
-  deletePlayer(){
-    console.log("delete works");
-    
-  }
-
-
 
   takeCard() {
     // if nobody is player XD
