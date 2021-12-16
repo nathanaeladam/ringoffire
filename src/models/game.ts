@@ -4,7 +4,7 @@ export class Game {
     public playedCards: number[] = [];
     public currentPlayer = 0;
     public pickCardAnimation = false;
-    public currentCard: number = undefined;
+    public currentCard: number = 0;
 
     constructor() {
         for (let i = 1; i < 53; i++) {
